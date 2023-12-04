@@ -1,67 +1,98 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 import HistoryItemContainer from "./HistoryItemContainer";
 
-function App() {
-  const [data, setData] = useState({
-    video_id: 1,
-    store_name: 'Store Name 1',
-    category: 'Theft',
-    confidence_rate: 50
-  })
+const exampleData = [
+  {
+    title: "마포구 서강대점 GS25 3호점",
+    date: "2023/10/04 10:23PM",
+    category: "Theft - 1 Person involved",
+    confidence: 64,
+    video : "sample_video1.mp4"
+  },
+  {
+    title: "양천구 목동동로1 CU 1호점",
+    date: "2023/10/01 5:23PM",
+    category: "Theft - 1 Person involved",
+    confidence: 76,
+    video : "sample_video2.mp4"
+  },
+  {
+    title: "강서구 김포공항 아이스크림 무인매장",
+    date: "2023/9/24 9:23AM",
+    category: "Theft - 1 Person involved",
+    confidence: 99,
+    video : "sample_video3.mp4"
+  },
+  {
+    title: "강남구 지하철역 2호선 게임 무인매장 ",
+    date: "2023/8/8 1:23AM",
+    category: "Theft - 1 Person involved",
+    confidence: 24,
+    video : "sample_video4.mp4"
+  },
+];
 
-  const handleClick = () => {
-    console.log("Button clicked");
-  }  
+export default function App() {
+  const [currendHistory, setCurrendHistory] = useState({
+    title: "마포구 서강대점 GS25 3호점",
+    date: "2023/10/04 10:23PM",
+    category: "Theft - 1 Person involved",
+    confidence: 64,
+    video : "sample_video1.mp4"
+  });
 
   return (
     <div className="App">
-      <div style={container}>
-        <aside>
-          <h2 class="display-title-2">History</h2>
-          <HistoryItemContainer />
-          <HistoryItemContainer />
-          <HistoryItemContainer />
-        </aside>
-        <main>
-          <video width="1289px" height="632px" autoPlay>
-            <source src="sample_video.mp4" type="video/mp4"></source>
-          </video>
-          <div style={content_divider}>
-            <div style={content_wrapper}>
-              <h1 class="display-title-1" id="store">Store Name 1</h1>
-              <h1 id="date">2023/10/23 10:23PM</h1>
-              <div id="category">Theft accident - 1 Person involved</div>
-              <div id="confidence">Confidence : 50%</div>
-              <h1 id="detail_link">Some details ++</h1>
-            </div>
-            <button class="send" onClick={handleClick} style={button}>Send Video</button>
+      <div className="flex h-screen w-full gap-8 bg-slate-100 p-8">
+        <div className="scrollbar-hide flex h-full w-1/4 flex-col gap-4 overflow-y-auto scroll-smooth rounded-2xl bg-white p-4 shadow-xl">
+          <p className="flex h-16 w-full items-center justify-center text-4xl">
+            History
+          </p>
+          {exampleData.map((history) => {
+            return (
+              <div onClick={() => {setCurrendHistory(history)}}>
+                <HistoryItemContainer
+                  title={history.title}
+                  category={history.category}
+                  date={history.date}
+                  confidence={history.confidence}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="flex h-full flex-1 flex-col gap-4 rounded-2xl bg-white p-4 shadow-xl">
+          <video className="w-full overflow-hidden rounded-xl bg-slate-100 " autoPlay src={currendHistory.video}></video>
+
+          <div className="flex w-full flex-1  flex-col">
+            <p className="w-full text-4xl">{currendHistory.title}</p>
+            <p className="w-full text-2xl">{currendHistory.date}</p>
+            <p className="w-full text-2xl">{`${currendHistory.category} (${currendHistory.confidence}%)`}</p>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );
 }
 
 const content_wrapper = {
-  width: "59vw"
-}
+  width: "59vw",
+};
 
 const content_divider = {
   display: "flex",
   flexDirection: "row",
-}
+};
 
 const container = {
   display: "flex",
   flexDirection: "row",
   width: "100%",
-  height: "100%"
-}
+  height: "100%",
+};
 
 const button = {
-  alignSelf: "flex-end"
-}
-
-export default App;
+  alignSelf: "flex-end",
+};
