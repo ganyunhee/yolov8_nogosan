@@ -27,6 +27,7 @@ const item_wrapper = {
   padding: "10px 20px 10px 20px",
 };
 const item_title = {
+  fontWeight: "bold",
   marginTop: 5,
   marginBottom: 0,
 };

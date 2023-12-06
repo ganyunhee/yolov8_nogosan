@@ -34,7 +34,7 @@ const exampleData = [
 ];
 
 export default function App() {
-  const [currendHistory, setCurrendHistory] = useState({
+  const [currentHistory, setcurrentHistory] = useState({
     title: "마포구 서강대점 GS25 3호점",
     date: "2023/10/04 10:23PM",
     category: "Theft - 1 Person involved",
@@ -46,12 +46,12 @@ export default function App() {
     <div className="App">
       <div className="flex h-screen w-full gap-8 bg-slate-100 p-8">
         <div className="scrollbar-hide flex h-full w-1/4 flex-col gap-4 overflow-y-auto scroll-smooth rounded-2xl bg-white p-4 shadow-xl">
-          <p className="flex h-16 w-full items-center justify-center text-4xl">
+          <p className="flex h-16 w-full items-center justify-center text-4xl font-bold">
             History
           </p>
           {exampleData.map((history) => {
             return (
-              <div onClick={() => {setCurrendHistory(history)}}>
+              <div onClick={() => {setcurrentHistory(history)}}>
                 <HistoryItemContainer
                   title={history.title}
                   category={history.category}
@@ -63,13 +63,13 @@ export default function App() {
           })}
         </div>
 
-        <div className="flex h-full flex-1 flex-col gap-4 rounded-2xl bg-white p-4 shadow-xl">
-          <video className="w-full overflow-hidden rounded-xl bg-slate-100 " autoPlay src={currendHistory.video}></video>
+        <div className="flex  -full flex-1 flex-col gap-4 rounded-2xl bg-white p-4 shadow-xl">
+          <video className="w-full overflow-hidden rounded-xl bg-slate-100 " autoPlay src={currentHistory.video}></video>
 
           <div className="flex w-full flex-1  flex-col">
-            <p className="w-full text-4xl">{currendHistory.title}</p>
-            <p className="w-full text-2xl">{currendHistory.date}</p>
-            <p className="w-full text-2xl">{`${currendHistory.category} (${currendHistory.confidence}%)`}</p>
+            <p className="w-full text-4xl p-2 font-bold">{currentHistory.title}</p>
+            <p className="w-full text-2xl pl-3">{currentHistory.date}</p>
+            <p className="w-full text-2xl pl-3 pb-3">{`${currentHistory.category} (${currentHistory.confidence}%)`}</p>
           </div>
         </div>
       </div>
